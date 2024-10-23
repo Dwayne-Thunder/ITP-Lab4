@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Зона переменных
         int m;//Переменная для выбора функции меню
 
@@ -11,13 +11,11 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         // Создаем PrintWriter для вывода на консоль
         PrintWriter writer = new PrintWriter(System.out, true);
-        // Создание объекта Scanner для чтения данных с клавиатуры
-        Scanner scanner = new Scanner(System.in);
+
 
 
         writer.println("Выберите функцию: \nДопустимые номера: \n1 - 1 задание\n2 - 2 задание \n3 - 3 задание \n4 для выхода");
-        m = scanner.nextInt();// Ввод М с проверкой на целочисленность
-        scanner.close();
+        m = reader.read();// Ввод М с проверкой на целочисленность
         Menu(m);
 
 
@@ -34,21 +32,20 @@ public class Main {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 // Создаем PrintWriter для вывода на консоль
                 PrintWriter writer = new PrintWriter(System.out, true);
-                // Создание объекта Scanner для чтения данных с клавиатуры
-                Scanner scanner = new Scanner(System.in);
 
 
                 try {
                     writer.println("Введите значение X:");
-                    x = scanner.nextInt();
+                    x = Integer.parseInt(reader.readLine());
 
                     y = 285 / x;
                     writer.println("Результат функции  y = 285 / " + x + " равен:" + y);
-                    // Закрытие Scanner
-                    scanner.close();
+
                 } catch (ArithmeticException zero) {
                     // перехватить исключение
                     System.out.println("Ты ШАЙТАН делишь на ноль!");
+                } catch (IOException e) {
+                    System.out.println("Ошибка ввода: " + e.getMessage());
                 }
 
             case '2':
