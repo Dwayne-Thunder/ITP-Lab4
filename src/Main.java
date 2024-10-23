@@ -20,6 +20,21 @@ public class Main {
 
     }
 
+
+    // Метод для заполнения символьного массива
+    public static void enterArray(char[] array) throws IOException, ArrayIndexOutOfBoundsException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < array.length + 1; i++) { // Намеренная ошибка (i < array.length + 1) для выброса исключения
+            System.out.print("Введите символ для позиции " + i + ": ");
+            array[i] = reader.readLine().charAt(0); // Чтение первого символа из введённой строки
+        }
+    }
+
+
+
+
+
     public static void Menu(int funk) {
         switch (funk) {
             case '1':
@@ -35,9 +50,9 @@ public class Main {
 
                 try {
                     writer.println("Введите значение X:");
-                    x = Integer.parseInt(reader.readLine());
+                    x = Integer.parseInt(reader.readLine());//Если это гуано не парсить то получится дичь
 
-                    y = 285 / x;
+                    y = 285 / x;// Наша функция
                     writer.println("Результат функции  y = 285 / " + x + " равен:" + y);
 
                 } catch (ArithmeticException zero) {
@@ -48,6 +63,24 @@ public class Main {
                 }
 
             case '2':
+                // Создаем символьный массив
+                char[] charArray = new char[5]; // массив на 5 символов
+                try {
+                    // Вызываем метод для заполнения массива
+                    enterArray(charArray);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    // Обрабатываем исключение выхода за границы массива
+                    System.out.println("Ошибка: Выход за пределы массива! Позиция: " + e.getMessage());
+                } catch (IOException e) {
+                    // Обрабатываем исключение ввода-вывода
+                    System.out.println("Ошибка ввода: " + e.getMessage());
+                }
+
+                // Вывод массива
+                System.out.println("Массив символов: ");
+                for (char c : charArray) {//Для каждого элемента c в массиве charArray выполните следующее
+                    System.out.print(c + " ");//выводит текущий символ (c) с добавлением пробела после него
+                }
             case '3':
             case '4':
                 break;
